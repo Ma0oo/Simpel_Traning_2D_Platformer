@@ -518,6 +518,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-706132871960648132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f42644d03462eb144b1c7ca72b580827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -532,25 +544,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: SpeedY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: LookToLeft
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Jump
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -693,23 +705,23 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 2261931469891810464}
-    second:
-    - {fileID: 8575269991258692242}
-  - first: {fileID: -5328515309910232076}
-    second:
-    - {fileID: 7867758442222432081}
-  - first: {fileID: 7702507436726391892}
-    second:
-    - {fileID: 8049116161664169508}
-    - {fileID: 5560185334326884579}
-    - {fileID: -2841256064245915289}
   - first: {fileID: 5563245696298458847}
     second:
     - {fileID: -7225367794501491346}
     - {fileID: 6482798142645748743}
     - {fileID: 653745468281401765}
     - {fileID: -8422874144483590417}
+  - first: {fileID: 7702507436726391892}
+    second:
+    - {fileID: 8049116161664169508}
+    - {fileID: 5560185334326884579}
+    - {fileID: -2841256064245915289}
+  - first: {fileID: -5328515309910232076}
+    second:
+    - {fileID: 7867758442222432081}
+  - first: {fileID: 2261931469891810464}
+    second:
+    - {fileID: 8575269991258692242}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -866,7 +878,8 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -706132871960648132}
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 0, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
@@ -1207,7 +1220,7 @@ AnimatorStateTransition:
     m_ConditionEvent: SpeedY
     m_EventTreshold: 0.05
   - m_ConditionMode: 3
-    m_ConditionEvent: SpeedX
+    m_ConditionEvent: SpeedY
     m_EventTreshold: -0.05
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}

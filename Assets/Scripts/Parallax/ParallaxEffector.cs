@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using System.Linq;
 
@@ -11,8 +12,6 @@ public class ParallaxEffector : MonoBehaviour
     [Range(0, 2f)] [SerializeField] private float _factorLenghtToDelete;
 
     private List<ParallaxElement> _parallaxElements;
-    private List<ParallaxElement> _newElement = new List<ParallaxElement>();
-    private List<ParallaxElement> _oldElement = new List<ParallaxElement>();
 
     public float Width => _rightPoint.x - _leftPoint.x;
 
@@ -33,12 +32,21 @@ public class ParallaxEffector : MonoBehaviour
 
     public void AddElement(ParallaxElement element)
     {
-        _parallaxElements.Add(element);
+        StartCoroutine(ActionWithElements(element, ActionType.Add));
     }
 
     public void RemoveElement(ParallaxElement element)
     {
-        _parallaxElements.Remove(element);
+        StartCoroutine(ActionWithElements(element, ActionType.Remove));
+    }
+
+    private IEnumerator ActionWithElements(ParallaxElement parallaxElement, ActionType actionType)
+    {
+        yield return new WaitForEndOfFrame();
+        if (actionType == ActionType.Add)
+            _parallaxElements.Add(parallaxElement);
+        else
+            _parallaxElements.Remove(parallaxElement);
     }
 
     private void OnDrawGizmosSelected()
@@ -52,5 +60,10 @@ public class ParallaxEffector : MonoBehaviour
         Vector2 left = transform.position;
         left.x += _leftPoint.x;
         Gizmos.DrawWireSphere(left, 0.2f);
+    }
+
+    enum ActionType
+    {
+        Add, Remove
     }
 }
