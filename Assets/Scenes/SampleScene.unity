@@ -1971,7 +1971,7 @@ GameObject:
   - component: {fileID: 1610149074}
   - component: {fileID: 1610149078}
   m_Layer: 8
-  m_Name: Walk_L_1
+  m_Name: Mashroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2055,13 +2055,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pathPoints:
-  - _nameAnimationTrigger: 
+  - _nameAnimationTrigger: WalkRight
     _point: {x: -9.521, y: 6.489}
     _speedToPoint: 1
-  - _nameAnimationTrigger: 
+  - _nameAnimationTrigger: WalkLeft
     _point: {x: -10.23, y: 6.489}
     _speedToPoint: 1
-  - _nameAnimationTrigger: 
+  - _nameAnimationTrigger: JumpLeft
     _point: {x: -12.49, y: 7.2}
     _speedToPoint: 1
   _indexStartPoint: 0
@@ -2142,7 +2142,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1706447910
 GameObject:
   m_ObjectHideFlags: 0
