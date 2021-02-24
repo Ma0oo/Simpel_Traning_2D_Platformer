@@ -1,11 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class Coin : MonoBehaviour, IInterect
 {
+    public event UnityAction<Coin> CoinUped;
+
     public void Interect()
     {
-        Destroy(gameObject);
+        if (CoinUped!=null)
+        {
+            CoinUped(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
