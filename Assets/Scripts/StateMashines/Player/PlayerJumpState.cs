@@ -9,15 +9,14 @@ public class PlayerJumpState : PlayerBaseState
         base.OnStateEnter(animator, stateInfo, layerIndex);
         PlayerKeyInput.KeyRightPressed += MoveRight;
         PlayerKeyInput.KeyLeftPressed += MoveLeft;
-        PlayerKeyInput.KeyMoveUnpressed += StopMove;
+        PlayerKeyInput.KeysMoveUnpressed += StopMoveX;
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerKeyInput.KeyRightPressed -= MoveRight;
         PlayerKeyInput.KeyLeftPressed -= MoveLeft;
-        PlayerKeyInput.KeyMoveUnpressed -= StopMove;
-        StopMove();
+        PlayerKeyInput.KeysMoveUnpressed -= StopMoveX;
         base.OnStateExit(animator, stateInfo, layerIndex);
     }
 }

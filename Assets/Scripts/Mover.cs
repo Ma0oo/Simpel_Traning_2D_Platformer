@@ -6,8 +6,10 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
+    public Vector2 Velocity => _rigidbody.velocity;
+
     private Rigidbody2D _rigidbody;
-    private Vector2 _moveDiraction;
+    private float _diractionX;
 
     private void Awake()
     {
@@ -16,18 +18,33 @@ public class Mover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if(_diractionX != 0)
+            MoveByX();
     }
 
-    private void Move()
+    private void MoveByX()
     {
-        if(_moveDiraction!=Vector2.zero)
-            _rigidbody.AddForce(_moveDiraction * _speed);
+        Vector2 temp = _rigidbody.velocity;
+        temp.x = _diractionX * _speed;
+        _rigidbody.velocity = temp;
     }
-    public void SetDiractionMove(Vector2 newDirection)
+
+    public void SetDiractionMoveX(float x)
     {
-        _moveDiraction = newDirection.normalized;
+        _diractionX = x;
     }
+
+    public void AddDiractionMoveX(float x)
+    {
+        _diractionX += x;
+    }
+    
+    public void SetVelocity(Vector2 velocity)
+    {
+        _diractionX = velocity.x;
+        _rigidbody.velocity = velocity;
+    }
+
     public void Jump()
     {
         _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);

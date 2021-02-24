@@ -2,10 +2,6 @@
 
 public class PlayerIdelState : PlayerBaseState
 {
-    public override void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
-    {
-        base.OnStateMachineEnter(animator, stateMachinePathHash);
-    }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
@@ -13,9 +9,8 @@ public class PlayerIdelState : PlayerBaseState
         {
             PlayerKeyInput.KeyRightPressed += MoveRight;
             PlayerKeyInput.KeyLeftPressed += MoveLeft;
-            PlayerKeyInput.KeyMoveUnpressed += StopMove;
-            PlayerKeyInput.KeyJumptPressed += PlayerMover.Jump;
-            PlayerKeyInput.KeyJumptPressed += SetJumpVar;
+            PlayerKeyInput.KeysMoveUnpressed += StopMoveX;
+            PlayerKeyInput.KeyJumptPressed += Jump;
         }
     }
 
@@ -25,9 +20,8 @@ public class PlayerIdelState : PlayerBaseState
         {
             PlayerKeyInput.KeyRightPressed -= MoveRight;
             PlayerKeyInput.KeyLeftPressed -= MoveLeft;
-            PlayerKeyInput.KeyMoveUnpressed -= StopMove;
-            PlayerKeyInput.KeyJumptPressed -= PlayerMover.Jump;
-            PlayerKeyInput.KeyJumptPressed -= SetJumpVar;
+            PlayerKeyInput.KeysMoveUnpressed -= StopMoveX;
+            PlayerKeyInput.KeyJumptPressed -= Jump;
         }
         base.OnStateExit(animator, stateInfo, layerIndex);
     }

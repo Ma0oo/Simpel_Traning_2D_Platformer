@@ -17,21 +17,22 @@ public abstract class PlayerBaseState : StateMachineBehaviour
 
     protected void MoveRight()
     {
-        PlayerMover.SetDiractionMove(PlayerMover.transform.right);
+        PlayerMover.SetDiractionMoveX(1);
     }
 
     protected void MoveLeft()
     {
-        PlayerMover.SetDiractionMove(PlayerMover.transform.right * -1);
+        PlayerMover.SetDiractionMoveX(-1);
     }
 
-    protected void StopMove()
+    protected void StopMoveX()
     {
-        PlayerMover.SetDiractionMove(Vector2.zero);
+        PlayerMover.SetVelocity(new Vector2(0, PlayerMover.Velocity.y));
     }
     
-    protected void SetJumpVar()
+    protected void Jump()
     {
+        PlayerMover.Jump();
         _animator.SetTrigger("Jump");
     }
 }
