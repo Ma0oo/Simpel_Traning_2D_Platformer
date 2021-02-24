@@ -16,14 +16,14 @@ public class TransformPathMover : MonoBehaviour, IMover
     {
         foreach (var item in _pathPoints)
         {
-            item.SetPoint(transform.position);
+            item.TryChangeDefaulPoint(transform.position);
         }
     }
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        OnPointReached();
+        
     }
 
     private void OnEnable()
@@ -32,6 +32,7 @@ public class TransformPathMover : MonoBehaviour, IMover
         {
             point.PointReached += OnPointReached;
         }
+        _pathPoints[_indexStartPoint].StartMove(_animator, (coroutine) => _actionMove = StartCoroutine(coroutine));
     }
 
     private void OnDisable()
@@ -40,6 +41,8 @@ public class TransformPathMover : MonoBehaviour, IMover
         {
             point.PointReached -= OnPointReached;
         }
+        StopCoroutine(_actionMove);
+        _actionMove = null;
     }
 
     private void OnPointReached()
@@ -49,7 +52,7 @@ public class TransformPathMover : MonoBehaviour, IMover
             _indexStartPoint++;
             if (_indexStartPoint >= _pathPoints.Count)
                 _indexStartPoint = 0;
-            _pathPoints[_indexStartPoint].StartMove(_animator, (cor) =>  _actionMove = StartCoroutine(cor) );
+            _pathPoints[_indexStartPoint].StartMove(_animator, (coroutine) =>  _actionMove = StartCoroutine(coroutine) );
         }
     }
 
@@ -61,11 +64,17 @@ public class TransformPathMover : MonoBehaviour, IMover
         {
             for (int i = 0; i < _pathPoints.Count; i++)
             {
-                if (i == _pathPoints.Count - 1)
-                    return;
                 Gizmos.color = colors[i % colors.Length];
-                Gizmos.DrawWireSphere(_pathPoints[i].Point, _raduisShere);
-                Gizmos.DrawLine(_pathPoints[i].Point, _pathPoints[i + 1].Point);
+                if (i == _pathPoints.Count - 1) 
+                {
+                    Gizmos.DrawWireSphere(_pathPoints[i].Point, _raduisShere);
+                }
+                else
+                {
+                    Gizmos.color = colors[i % colors.Length];
+                    Gizmos.DrawWireSphere(_pathPoints[i].Point, _raduisShere);
+                    Gizmos.DrawLine(_pathPoints[i].Point, _pathPoints[i + 1].Point);
+                }
             }
         }
     }
@@ -82,7 +91,7 @@ public class PathPoint
 
     public Vector2 Point => _point;
 
-    public void SetPoint(Vector2 newPoint)
+    public void TryChangeDefaulPoint(Vector2 newPoint)
     {
         if (_point == Vector2.zero)
             _point = newPoint;

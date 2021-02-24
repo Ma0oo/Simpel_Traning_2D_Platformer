@@ -67,7 +67,6 @@ public class CoinsSpawner : MonoBehaviour
                         _unactiveCoin.Remove(coinToSpawn);
                         coinToSpawn.gameObject.SetActive(true);
                         _activeCoin.Add(coinToSpawn);
-                        Debug.Log("Монета активирована");
                         break;
                     }
                 }
