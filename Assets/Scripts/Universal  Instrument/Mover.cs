@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Mover : MonoBehaviour
+public class Mover : MonoBehaviour, IMover
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;

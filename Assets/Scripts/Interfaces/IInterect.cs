@@ -1,0 +1,4 @@
+﻿interface IInterect
+{
+    void Interect();
+}
