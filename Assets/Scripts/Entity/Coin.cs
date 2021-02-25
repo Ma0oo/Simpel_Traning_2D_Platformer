@@ -9,12 +9,8 @@ public class Coin : MonoBehaviour, IInterect
     public void Interect()
     {
         if (CoinUped!=null)
-        {
             CoinUped(this);
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 }

@@ -19,6 +19,7 @@ public class Player : MonoBehaviour, IDamagabel
         if (collision.TryGetComponent(out IInterect interect))
             interect.Interect();
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.TryGetComponent(out IInterect interect))

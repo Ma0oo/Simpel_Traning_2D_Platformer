@@ -12,6 +12,8 @@ public class TransformPathMover : MonoBehaviour, IMover
     private Animator _animator;
     private Coroutine _actionMove;
 
+    public GameObject GameObject => gameObject;
+
     private void OnValidate()
     {
         foreach (var item in _pathPoints)

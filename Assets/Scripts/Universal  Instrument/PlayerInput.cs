@@ -8,8 +8,7 @@ public class PlayerInput : MonoBehaviour
     public UnityAction KeyLeftPressed;
     public UnityAction KeyJumptPressed;
     public UnityAction KeysMoveUnpressed;
-
-
+    
     private void Update()
     {
         KeyCheck(KeyCode.A, Input.GetKey, KeyLeftPressed);

@@ -5,9 +5,11 @@ public class MoverByRigibody : MonoBehaviour, IMover
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private Clamper clamperSpeedY;
+    [SerializeField] private Clamper _clamperSpeedY;
 
     public Vector2 Velocity => _rigidbody.velocity;
+
+    public GameObject GameObject => gameObject;
 
     private Rigidbody2D _rigidbody;
     private float _diractionX;
@@ -19,10 +21,10 @@ public class MoverByRigibody : MonoBehaviour, IMover
 
     private void FixedUpdate()
     {
-        if (clamperSpeedY.IsUse)
+        if (_clamperSpeedY.IsUse)
         {
             Vector2 tempVelocity = Velocity;
-            tempVelocity.y = clamperSpeedY.Clamp(tempVelocity.y);
+            tempVelocity.y = _clamperSpeedY.Clamp(tempVelocity.y);
             _rigidbody.velocity = tempVelocity;
         }
         if (_diractionX != 0)
@@ -41,7 +43,7 @@ public class MoverByRigibody : MonoBehaviour, IMover
         _diractionX = x;
     }
 
-    public void SetVelocity(Vector2 velocity)
+    public void SetVelocityAndDiractionX(Vector2 velocity)
     {
         _diractionX = velocity.x;
         _rigidbody.velocity = velocity;

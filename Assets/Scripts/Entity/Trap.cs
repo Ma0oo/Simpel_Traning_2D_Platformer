@@ -10,4 +10,5 @@ public class Trap : MonoBehaviour
         if (collision.TryGetComponent(out IDamagabel damagabel))
             damagabel.ApplayDamage();
     }
+
 }

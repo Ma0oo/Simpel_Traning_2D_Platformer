@@ -17,17 +17,19 @@ public abstract class PlayerBaseState : StateMachineBehaviour
 
     protected void MoveRight()
     {
-        PlayerMover.SetDiractionMoveX(1);
+        float diractionToRight = 1;
+        PlayerMover.SetDiractionMoveX(diractionToRight);
     }
 
     protected void MoveLeft()
     {
-        PlayerMover.SetDiractionMoveX(-1);
+        float diractionToLeft = -1;
+        PlayerMover.SetDiractionMoveX(diractionToLeft);
     }
 
     protected void StopMoveX()
     {
-        PlayerMover.SetVelocity(new Vector2(0, PlayerMover.Velocity.y));
+        PlayerMover.SetVelocityAndDiractionX(new Vector2(0, PlayerMover.Velocity.y));
     }
     
     protected void Jump()

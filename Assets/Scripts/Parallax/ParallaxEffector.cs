@@ -51,8 +51,9 @@ public class ParallaxEffector : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        DrawPointSphere(_rightPoint, 0.2f, Color.magenta);
-        DrawPointSphere(_leftPoint, 0.2f, Color.white);
+        float rediusGizmoSphere = 0.2f;
+        DrawPointSphere(_rightPoint, rediusGizmoSphere, Color.magenta);
+        DrawPointSphere(_leftPoint, rediusGizmoSphere, Color.white);
     }
 
     private void DrawPointSphere(Vector2 point, float radius, Color color)

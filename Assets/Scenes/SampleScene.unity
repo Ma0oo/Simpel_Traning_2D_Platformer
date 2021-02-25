@@ -5335,7 +5335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb3127b725b25a4e8fe3abcf5ee80b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedFollow: 6
+  _speedFollow: 3
   _offset: {x: 0, y: 0.95, z: 0}
   _target: {fileID: 1963805741}
   _clamperX:
