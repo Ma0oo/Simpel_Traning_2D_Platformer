@@ -1,4 +1,4 @@
-﻿
-public interface IMover
+﻿public interface IMover
 {
+    
 }

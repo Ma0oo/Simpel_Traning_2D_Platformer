@@ -16,14 +16,13 @@ public class TransformPathMover : MonoBehaviour, IMover
     {
         foreach (var item in _pathPoints)
         {
-            item.TryChangeDefaulPoint(transform.position);
+            item.TryChangeDefaulPointTo(transform.position);
         }
     }
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        
     }
 
     private void OnEnable()
@@ -32,7 +31,7 @@ public class TransformPathMover : MonoBehaviour, IMover
         {
             point.PointReached += OnPointReached;
         }
-        _pathPoints[_indexStartPoint].StartMove(_animator, (coroutine) => _actionMove = StartCoroutine(coroutine));
+        MoveToPointByIndex();
     }
 
     private void OnDisable()
@@ -47,13 +46,18 @@ public class TransformPathMover : MonoBehaviour, IMover
 
     private void OnPointReached()
     {
-        if (_pathPoints != null)
+        if (_pathPoints != null && _pathPoints.Count>1)
         {
             _indexStartPoint++;
             if (_indexStartPoint >= _pathPoints.Count)
                 _indexStartPoint = 0;
-            _pathPoints[_indexStartPoint].StartMove(_animator, (coroutine) =>  _actionMove = StartCoroutine(coroutine) );
+            MoveToPointByIndex();
         }
+    }
+
+    private void MoveToPointByIndex()
+    {
+        _pathPoints[_indexStartPoint].StartMove(_animator, (coroutine) => _actionMove = StartCoroutine(coroutine));
     }
 
     private void OnDrawGizmosSelected()
@@ -71,7 +75,6 @@ public class TransformPathMover : MonoBehaviour, IMover
                 }
                 else
                 {
-                    Gizmos.color = colors[i % colors.Length];
                     Gizmos.DrawWireSphere(_pathPoints[i].Point, _raduisShere);
                     Gizmos.DrawLine(_pathPoints[i].Point, _pathPoints[i + 1].Point);
                 }
@@ -91,7 +94,7 @@ public class PathPoint
 
     public Vector2 Point => _point;
 
-    public void TryChangeDefaulPoint(Vector2 newPoint)
+    public void TryChangeDefaulPointTo(Vector2 newPoint)
     {
         if (_point == Vector2.zero)
             _point = newPoint;

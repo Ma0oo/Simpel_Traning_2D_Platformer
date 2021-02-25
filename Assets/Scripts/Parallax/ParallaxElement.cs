@@ -13,32 +13,31 @@ public class ParallaxElement : MonoBehaviour
         Init();
     }
 
-    public void Move(Vector2 velocity)
+    public void MoveWithTarget(Vector2 velocityOfTarget)
     {
         Vector2 newPosition = transform.position;
-        newPosition.x += velocity.x * Time.deltaTime * _speedFactor;
+        newPosition.x += velocityOfTarget.x * Time.deltaTime * _speedFactor;
         transform.position = newPosition;
     }
 
-    public void TryDelete(Vector2 playerPosition, float factorLengt)
+    public void TryDelete(Vector2 targetPostion, float factorLengt)
     {
-        if (CheckCrossingPlayerDistacne(playerPosition, Direction.Left, factorLengt) || CheckCrossingPlayerDistacne(playerPosition, Direction.Right, factorLengt))
+        if (CheckCrossingDistanceByTarget(targetPostion, Direction.Left, factorLengt) || CheckCrossingDistanceByTarget(targetPostion, Direction.Right, factorLengt))
         {
             _parallaxEffector.RemoveElement(this);
             Destroy(gameObject);
-            Destroy(this);
         }
     }
 
-    public void TrySpawnNeighbour(Vector2 playerPosition, float factorLengt)
+    public void TrySpawnNeighbour(Vector2 targetPosition, float factorLengt)
     {
-        if (CheckCrossingPlayerDistacne(playerPosition, Direction.Right, factorLengt))
+        if (CheckCrossingDistanceByTarget(targetPosition, Direction.Right, factorLengt))
             SpawnElement(ref _rightNeighbour, Direction.Left);
-        else if (CheckCrossingPlayerDistacne(playerPosition, Direction.Left, factorLengt))
+        else if (CheckCrossingDistanceByTarget(targetPosition, Direction.Left, factorLengt))
             SpawnElement(ref _leftNeighbour, Direction.Right);
     }
 
-    public void SetNeighbour(Direction directionToParent, ParallaxElement parent)
+    private void SetNeighbour(Direction directionToParent, ParallaxElement parent)
     {
         if (directionToParent == Direction.Right)
             _rightNeighbour = parent;
@@ -60,12 +59,13 @@ public class ParallaxElement : MonoBehaviour
         }
     }
 
-    private bool CheckCrossingPlayerDistacne(Vector2 playerPosition, Direction direction, float factorLengtToBorlder)
+    private bool CheckCrossingDistanceByTarget(Vector2 targetPosition, Direction direction, float factorLengtToBorlder)
     {
+        float halfWidth = _parallaxEffector.Width / 2;
         if (direction == Direction.Left)
-            return playerPosition.x < transform.position.x + _parallaxEffector.Width / 2 * factorLengtToBorlder * System.Convert.ToInt32(direction);
+            return targetPosition.x < transform.position.x + halfWidth * factorLengtToBorlder * System.Convert.ToInt32(direction);
         else
-            return playerPosition.x > transform.position.x + _parallaxEffector.Width / 2 * factorLengtToBorlder * System.Convert.ToInt32(direction);
+            return targetPosition.x > transform.position.x + halfWidth * factorLengtToBorlder * System.Convert.ToInt32(direction);
     }
 
     private void Init()

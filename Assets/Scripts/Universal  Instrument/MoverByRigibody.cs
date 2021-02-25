@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Mover : MonoBehaviour, IMover
+public class MoverByRigibody : MonoBehaviour, IMover
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
@@ -34,11 +34,6 @@ public class Mover : MonoBehaviour, IMover
         _diractionX = x;
     }
 
-    public void AddDiractionMoveX(float x)
-    {
-        _diractionX += x;
-    }
-    
     public void SetVelocity(Vector2 velocity)
     {
         _diractionX = velocity.x;

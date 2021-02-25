@@ -7,7 +7,6 @@ public class PlayerInput : MonoBehaviour
     public UnityAction KeyRightPressed;
     public UnityAction KeyLeftPressed;
     public UnityAction KeyJumptPressed;
-    public UnityAction KeyDownPressed;
     public UnityAction KeysMoveUnpressed;
 
 
@@ -16,10 +15,9 @@ public class PlayerInput : MonoBehaviour
         KeyCheck(KeyCode.A, Input.GetKey, KeyLeftPressed);
         KeyCheck(KeyCode.D, Input.GetKey, KeyRightPressed);
         KeyCheck(KeyCode.Space, Input.GetKeyDown, KeyJumptPressed);
-        KeyCheck(KeyCode.S, Input.GetKey, KeyDownPressed);
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
-            if (!Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
                 KeysMoveUnpressed?.Invoke();
     }
 

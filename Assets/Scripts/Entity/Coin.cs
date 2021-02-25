@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Collider2D))]
 public class Coin : MonoBehaviour, IInterect
 {
     public event UnityAction<Coin> CoinUped;

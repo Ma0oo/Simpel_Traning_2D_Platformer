@@ -7,7 +7,7 @@ public class ParallaxEffector : MonoBehaviour
 {
     [SerializeField] private Vector2 _leftPoint;
     [SerializeField] private Vector2 _rightPoint;
-    [SerializeField] private Rigidbody2D _rigidbodyPlayer;
+    [SerializeField] private Rigidbody2D _rigidbodyTarget;
     [Range(0, 2f)] [SerializeField] private float _factorLenghtToSpawn;
     [Range(0, 2f)] [SerializeField] private float _factorLenghtToDelete;
 
@@ -24,9 +24,9 @@ public class ParallaxEffector : MonoBehaviour
     {
         foreach (var element in _parallaxElements)
         {
-            element.Move(_rigidbodyPlayer.velocity);
-            element.TryDelete(_rigidbodyPlayer.position, _factorLenghtToDelete);
-            element.TrySpawnNeighbour(_rigidbodyPlayer.position, _factorLenghtToSpawn);
+            element.MoveWithTarget(_rigidbodyTarget.velocity);
+            element.TryDelete(_rigidbodyTarget.position, _factorLenghtToDelete);
+            element.TrySpawnNeighbour(_rigidbodyTarget.position, _factorLenghtToSpawn);
         }
     }
 
@@ -51,15 +51,16 @@ public class ParallaxEffector : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.magenta;
-        Vector2 right = transform.position;
-        right.x += _rightPoint.x;
-        Gizmos.DrawWireSphere(right, 0.2f);
+        DrawPointSphere(_rightPoint, 0.2f, Color.magenta);
+        DrawPointSphere(_leftPoint, 0.2f, Color.white);
+    }
 
-        Gizmos.color = Color.white;
-        Vector2 left = transform.position;
-        left.x += _leftPoint.x;
-        Gizmos.DrawWireSphere(left, 0.2f);
+    private void DrawPointSphere(Vector2 point, float radius, Color color)
+    {
+        Gizmos.color = color;
+        Vector2 pointShere = transform.position;
+        pointShere.x += point.x;
+        Gizmos.DrawWireSphere(pointShere, radius);
     }
 
     enum ActionType

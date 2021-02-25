@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowToTarget : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    [SerializeField] private float _speedFollow;
     [SerializeField] private Vector3 _offset;
     [SerializeField] private Transform _target;
     [SerializeField] private Clamper _clamperX;
@@ -12,21 +12,13 @@ public class FollowToTarget : MonoBehaviour
 
     private void Update()
     {
-        Vector3 target;
-        if (_clamperY.IsUse)
-            target.y = _clamperY.Clamp(_target.position.y + _offset.y);
-        else
-            target.y = transform.position.y;
-
-        if (_clamperX.IsUse)
-            target.x = _clamperX.Clamp(_target.position.x + _offset.x);
-        else
-            target.x = transform.position.x;
+        Vector3 target = Vector3.zero;
+        target.y = _clamperY.IsUse ? _clamperY.Clamp(_target.position.y + _offset.y) : transform.position.y;
+        target.x = _clamperX.IsUse ? _clamperX.Clamp(_target.position.x + _offset.x) : transform.position.x;
         target.z = _offset.z;
-        transform.position = Vector3.MoveTowards(transform.position, target, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, _speedFollow * Time.deltaTime);
     }
 }
-
 
 [System.Serializable]
 public class Clamper

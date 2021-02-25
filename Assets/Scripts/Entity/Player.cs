@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer), typeof(Animator), typeof(Collider2D))]
 public class Player : MonoBehaviour, IDamagabel
 {
     private SpriteRenderer _spriteRenderer;
@@ -32,8 +32,6 @@ public class Player : MonoBehaviour, IDamagabel
         _animator.enabled = false;
         gameObject.layer = deadLayer;
         foreach (var item in GetComponents<MonoBehaviour>())
-        {
             item.enabled = false;
-        }
     }
 }

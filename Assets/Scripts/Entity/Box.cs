@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
+[RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
 public class Box : MonoBehaviour, IInterect
 {
     [SerializeField] private Sprite _openSprite;
@@ -17,12 +17,13 @@ public class Box : MonoBehaviour, IInterect
     {
         if (!_isOpen)
         {
-            float _offsetSpwnY = 1.2f;
+            float _offsetSpawnY = 1.2f;
 
             _isOpen = true;
             _spriteRenderer.sprite = _openSprite;
             _collider2D.isTrigger = true;
-            Instantiate(_loot, new Vector2(transform.position.x, transform.position.y + _offsetSpwnY), _loot.transform.rotation);
+            if (_loot)
+                Instantiate(_loot, new Vector2(transform.position.x, transform.position.y + _offsetSpawnY), _loot.transform.rotation);
             Destroy(this);
         }
     }
@@ -34,7 +35,7 @@ public class Box : MonoBehaviour, IInterect
 
     private void Init()
     {
-        _collider2D = GetComponent<BoxCollider2D>();
+        _collider2D = GetComponent<Collider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = _isOpen ? _openSprite : _closeSprite;
     }

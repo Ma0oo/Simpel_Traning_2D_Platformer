@@ -3,7 +3,7 @@
 public abstract class PlayerBaseState : StateMachineBehaviour
 {
     protected PlayerInput PlayerKeyInput;
-    protected Mover PlayerMover;
+    protected MoverByRigibody PlayerMover;
 
     private Animator _animator;
 
@@ -11,7 +11,7 @@ public abstract class PlayerBaseState : StateMachineBehaviour
     {
         _animator = animator;
         PlayerKeyInput = animator.GetComponent<PlayerInput>();
-        PlayerMover = animator.GetComponent<Mover>();
+        PlayerMover = animator.GetComponent<MoverByRigibody>();
         base.OnStateEnter(animator, stateInfo, layerIndex);
     }
 

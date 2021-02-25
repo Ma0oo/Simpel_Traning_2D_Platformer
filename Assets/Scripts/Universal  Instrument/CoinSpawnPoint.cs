@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class CoinSpawnPoint : MonoBehaviour
 {
-    private Coin _coin;
+    private Coin _coinOnPoint;
 
     public bool TrySpawnCoin(Coin coin)
     {
-        if (_coin == null)
+        if (_coinOnPoint == null)
         {
-            _coin = coin;
-            _coin.transform.position = transform.position;
-            _coin.CoinUped += OnCoinUped;
+            _coinOnPoint = coin;
+            _coinOnPoint.transform.position = transform.position;
+            _coinOnPoint.CoinUped += OnCoinUped;
+            coin.transform.SetParent(transform);
             return true;
         }
         else
@@ -23,19 +24,19 @@ public class CoinSpawnPoint : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_coin)
-            _coin.CoinUped += OnCoinUped;
+        if(_coinOnPoint)
+            _coinOnPoint.CoinUped += OnCoinUped;
 
     }
     private void OnDisable()
     {
-        if(_coin)
-            _coin.CoinUped -= OnCoinUped;
+        if(_coinOnPoint)
+            _coinOnPoint.CoinUped -= OnCoinUped;
     }
 
     private void OnCoinUped(Coin coin)
     {
-        _coin.CoinUped -= OnCoinUped;
-        _coin = null;
+        _coinOnPoint.CoinUped -= OnCoinUped;
+        _coinOnPoint = null;
     }
 }
