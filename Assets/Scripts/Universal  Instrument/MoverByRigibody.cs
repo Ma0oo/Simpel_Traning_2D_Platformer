@@ -5,6 +5,7 @@ public class MoverByRigibody : MonoBehaviour, IMover
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private Clamper clamperSpeedY;
 
     public Vector2 Velocity => _rigidbody.velocity;
 
@@ -18,7 +19,13 @@ public class MoverByRigibody : MonoBehaviour, IMover
 
     private void FixedUpdate()
     {
-        if(_diractionX != 0)
+        if (clamperSpeedY.IsUse)
+        {
+            Vector2 tempVelocity = Velocity;
+            tempVelocity.y = clamperSpeedY.Clamp(tempVelocity.y);
+            _rigidbody.velocity = tempVelocity;
+        }
+        if (_diractionX != 0)
             MoveByX();
     }
 

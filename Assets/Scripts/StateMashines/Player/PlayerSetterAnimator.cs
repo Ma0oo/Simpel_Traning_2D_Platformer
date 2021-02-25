@@ -21,6 +21,7 @@ public class PlayerSetterAnimator : MonoBehaviour
         _playerInput.KeyRightPressed += OnKeyRightPressed;
         _playerInput.KeyLeftPressed += OnKeyLeftPressed;
     }
+
     private void OnDisable()
     {
         _playerInput.KeyRightPressed -= OnKeyRightPressed;
