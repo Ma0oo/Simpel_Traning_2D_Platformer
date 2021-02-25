@@ -3348,9 +3348,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 4
   _jumpForce: 7
-  clamperSpeedY:
+  _clamperSpeedY:
     _isUse: 1
-    _min: -3.25
+    _min: -3
     _max: 12
 --- !u!114 &1963805746
 MonoBehaviour:
