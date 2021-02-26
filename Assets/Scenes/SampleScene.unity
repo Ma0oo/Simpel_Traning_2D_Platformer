@@ -3138,7 +3138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950251463}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.89, y: 2.81, z: -10}
+  m_LocalPosition: {x: -4.59, y: 2.81, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3160,11 +3160,11 @@ MonoBehaviour:
   _offset: {x: 0.7, y: 0.53, z: -10}
   _target: {fileID: 1963805741}
   _clamperX:
-    _isUse: 1
-    _min: -100
-    _max: 100
+    _isOn: 1
+    _min: -4.5
+    _max: 5.5
   _clamperY:
-    _isUse: 1
+    _isOn: 1
     _min: -5
     _max: 100
 --- !u!1 &1963805738
@@ -3349,7 +3349,7 @@ MonoBehaviour:
   _speed: 4
   _jumpForce: 7
   _clamperSpeedY:
-    _isUse: 1
+    _isOn: 1
     _min: -3
     _max: 12
 --- !u!114 &1963805746
@@ -5339,11 +5339,11 @@ MonoBehaviour:
   _offset: {x: 0, y: 0.95, z: 0}
   _target: {fileID: 1963805741}
   _clamperX:
-    _isUse: 0
+    _isOn: 0
     _min: 0
     _max: 0
   _clamperY:
-    _isUse: 1
+    _isOn: 1
     _min: 0
     _max: 10
 --- !u!1001 &2108354644

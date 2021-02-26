@@ -21,12 +21,10 @@ public class MoverByRigibody : MonoBehaviour, IMover
 
     private void FixedUpdate()
     {
-        if (_clamperSpeedY.IsUse)
-        {
-            Vector2 tempVelocity = Velocity;
-            tempVelocity.y = _clamperSpeedY.Clamp(tempVelocity.y);
+        Vector2 tempVelocity = Velocity;
+        if (_clamperSpeedY.TryClamp(ref tempVelocity.y, Velocity.y))
             _rigidbody.velocity = tempVelocity;
-        }
+
         if (_diractionX != 0)
             MoveByX();
     }

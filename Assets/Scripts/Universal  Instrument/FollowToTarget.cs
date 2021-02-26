@@ -13,8 +13,10 @@ public class FollowToTarget : MonoBehaviour
     private void Update()
     {
         Vector3 target = Vector3.zero;
-        target.y = _clamperY.IsUse ? _clamperY.Clamp(_target.position.y + _offset.y) : transform.position.y;
-        target.x = _clamperX.IsUse ? _clamperX.Clamp(_target.position.x + _offset.x) : transform.position.x;
+        if (!_clamperY.TryClamp(ref target.y, _target.position.y + _offset.y))
+            target.y = transform.position.y;
+        if (!_clamperX.TryClamp(ref target.x, _target.position.x + _offset.x))
+            target.x = transform.position.x;
         target.z = _offset.z;
         transform.position = Vector3.MoveTowards(transform.position, target, _speedFollow * Time.deltaTime);
     }
@@ -23,13 +25,16 @@ public class FollowToTarget : MonoBehaviour
 [System.Serializable]
 public class Clamper
 {
-    [SerializeField] private bool _isUse;
+    [SerializeField] private bool _isOn;
     [SerializeField] private float _min, _max;
 
-    public bool IsUse => _isUse;
-
-    public float Clamp(float targetValue)
+    public bool TryClamp(ref float targetValue, float valueToClamp)
     {
-        return Mathf.Clamp(targetValue, _min, _max);
+        if (_isOn)
+        {
+            targetValue = Mathf.Clamp(valueToClamp, _min, _max);
+            return true;
+        }
+        return false;
     }
 }
