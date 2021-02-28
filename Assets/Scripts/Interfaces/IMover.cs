@@ -2,5 +2,5 @@
 
 public interface IMover
 {
-    GameObject GameObject { get; }
+    MonoBehaviour MonoComponentMover { get; }
 }

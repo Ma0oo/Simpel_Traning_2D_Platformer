@@ -9,7 +9,7 @@ public class MoverByRigibody : MonoBehaviour, IMover
 
     public Vector2 Velocity => _rigidbody.velocity;
 
-    public GameObject GameObject => gameObject;
+    public MonoBehaviour MonoComponentMover => this;
 
     private Rigidbody2D _rigidbody;
     private float _diractionX;
@@ -17,6 +17,17 @@ public class MoverByRigibody : MonoBehaviour, IMover
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnEnable()
+    {
+        _rigidbody.isKinematic = false;
+    }
+
+    private void OnDisable()
+    {
+        _rigidbody.isKinematic = true;
+        _rigidbody.velocity = Vector2.zero;
     }
 
     private void FixedUpdate()

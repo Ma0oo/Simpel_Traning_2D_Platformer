@@ -12,7 +12,7 @@ public class TransformPathMover : MonoBehaviour, IMover
     private Animator _animator;
     private Coroutine _actionMove;
 
-    public GameObject GameObject => gameObject;
+    public MonoBehaviour MonoComponentMover => this;
 
     private void OnValidate()
     {
@@ -48,7 +48,7 @@ public class TransformPathMover : MonoBehaviour, IMover
 
     private void OnPointReached()
     {
-        if (_pathPoints != null && _pathPoints.Count>1)
+        if (_pathPoints != null && _pathPoints.Count > 1)
         {
             _indexStartPoint++;
             if (_indexStartPoint >= _pathPoints.Count)
@@ -71,7 +71,7 @@ public class TransformPathMover : MonoBehaviour, IMover
             for (int i = 0; i < _pathPoints.Count; i++)
             {
                 Gizmos.color = colors[i % colors.Length];
-                if (i == _pathPoints.Count - 1) 
+                if (i == _pathPoints.Count - 1)
                 {
                     Gizmos.DrawWireSphere(_pathPoints[i].Point, _raduisShere);
                 }
